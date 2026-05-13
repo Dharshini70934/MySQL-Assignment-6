@@ -51,6 +51,7 @@ INSERT INTO Fees VALUES
 (1001, 25000, '2025-01-10'),
 (1002, 30000, '2025-02-15');
 
+
 -- 1. Display Student name, address, Batch Code, Batch Name, Faculty Name, Duration
 SELECT 
 S.NAME AS STUDENT_NAME,
