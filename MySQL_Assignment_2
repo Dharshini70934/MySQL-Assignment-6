@@ -145,7 +145,6 @@ GROUP BY DEPARTMENT_NAME
 HAVING AVG(SALARY) < 12000;
 
 -- 25. Display records where department is not Accts and salary is not between 10000 and 20000
-SELECT *
-FROM Employee
+SELECT * FROM Employee
 WHERE DEPARTMENT_NAME != 'Accts'
 AND SALARY NOT BETWEEN 10000 AND 20000;
