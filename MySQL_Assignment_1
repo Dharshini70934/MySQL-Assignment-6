@@ -57,49 +57,49 @@ FROM Worker;
 SELECT CONCAT(FIRST_NAME, ' ', LAST_NAME) AS COMPLETE_NAME
 FROM Worker;
 
--- Q11. Print all Worker details ordered by FIRST_NAME ascending
+--------- Q11. Print all Worker details ordered by FIRST_NAME ascending
 SELECT * FROM Worker
 ORDER BY FIRST_NAME ASC;
 
--- Q12. Print all Worker details ordered by FIRST_NAME ascending and DEPARTMENT descending
+-------- Q12. Print all Worker details ordered by FIRST_NAME ascending and DEPARTMENT descending
 SELECT * FROM Worker
 ORDER BY FIRST_NAME ASC, DEPARTMENT DESC;
 
--- Q13. Print details of workers with FIRST_NAME as Vipul and Satish
+-------- Q13. Print details of workers with FIRST_NAME as Vipul and Satish
 SELECT * FROM Worker
 WHERE FIRST_NAME IN ('Vipul', 'Satish');
 
--- Q14. Print details excluding Vipul and Satish
+-------- Q14. Print details excluding Vipul and Satish
 SELECT * FROM Worker
 WHERE FIRST_NAME NOT IN ('Vipul', 'Satish');
 
--- Q15. Print details of workers in Admin department
+-------- Q15. Print details of workers in Admin department
 SELECT * FROM Worker
 WHERE DEPARTMENT = 'Admin';
 
--- Q16. Print details of workers whose FIRST_NAME contains 'a'
+--------- Q16. Print details of workers whose FIRST_NAME contains 'a'
 SELECT * FROM Worker
 WHERE FIRST_NAME LIKE '%a%';
 
--- Q17. Print details of workers whose FIRST_NAME ends with 'a'
+---------- Q17. Print details of workers whose FIRST_NAME ends with 'a'
 SELECT * FROM Worker
 WHERE FIRST_NAME LIKE '%a';
 
--- Q18. Print details of workers whose FIRST_NAME ends with 'h' and contains six alphabets
+---------- Q18. Print details of workers whose FIRST_NAME ends with 'h' and contains six alphabets
 SELECT * FROM Worker
 WHERE FIRST_NAME LIKE '%h'
 AND LENGTH(FIRST_NAME) = 6;
 
--- Q19. Print details of workers whose SALARY lies between 100000 and 500000
+--------- Q19. Print details of workers whose SALARY lies between 100000 and 500000
 SELECT * FROM Worker
 WHERE SALARY BETWEEN 100000 AND 500000;
 
--- Q20. Print details of workers who joined in Feb 2014
+---------- Q20. Print details of workers who joined in Feb 2014
 SELECT * FROM Worker
 WHERE MONTH(JOINING_DATE) = 2
 AND YEAR(JOINING_DATE) = 2014;
 
--- Q21. Fetch count of employees working in Admin department
+--------- Q21. Fetch count of employees working in Admin department
 SELECT COUNT(*) AS TOTAL_EMPLOYEES
 FROM Worker
 WHERE DEPARTMENT = 'Admin';
