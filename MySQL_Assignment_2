@@ -1,1 +1,160 @@
+DROP TABLE IF EXISTS Employee;
 
+CREATE TABLE Employee (
+    EMPLOYEE_ID INT PRIMARY KEY AUTO_INCREMENT,
+    NAME CHAR(25) NOT NULL,
+    EXP INT CHECK (EXP >= 2),
+    SALARY INT CHECK (SALARY BETWEEN 12000 AND 30000),
+    DEPARTMENT_NAME CHAR(25) CHECK (DEPARTMENT_NAME IN ('HR', 'Sales', 'Accts', 'IT')),
+    MANAGER_NAME CHAR(25),
+    AGE INT DEFAULT 26 CHECK (AGE BETWEEN 26 AND 60)
+);
+
+ALTER TABLE Employee AUTO_INCREMENT = 100;
+
+INSERT INTO Employee
+(NAME, EXP, SALARY, DEPARTMENT_NAME, MANAGER_NAME)
+VALUES
+('Aman', 3, 15000, 'HR', 'Ravi'),
+('Ajay', 5, 22000, 'Sales', 'Kumar'),
+('Anita', 4, 18000, 'Accts', 'Ravi'),
+('Rahul', 6, 25000, 'IT', 'Suresh'),
+('Arun', 7, 27000, 'HR', 'Kumar'),
+('Sneha', 3, 16000, 'Sales', 'Ravi'),
+('Karthik', 8, 29000, 'IT', 'Suresh');
+
+SELECT * FROM Employee;
+
+------- 1. Display employee id, name, salary
+SELECT EMPLOYEE_ID, NAME, SALARY
+FROM Employee;
+
+-------- 2. Display aliases for employee id, name and salary
+SELECT EMPLOYEE_ID AS 'Employee ID',
+NAME AS 'Name of Employee',
+SALARY AS 'Salary of Employee'
+FROM Employee;
+
+--------- 3. Display name, salary and incremented salary
+SELECT NAME, SALARY,
+SALARY + 2000 AS INCREMENTED_SALARY
+FROM Employee;
+
+------- 4. Display total salary disbursed for all departments
+SELECT DEPARTMENT_NAME,
+SUM(SALARY) AS TOTAL_SALARY
+FROM Employee
+GROUP BY DEPARTMENT_NAME;
+
+---------- 5. Display total, maximum and average salary department wise
+SELECT DEPARTMENT_NAME,
+SUM(SALARY) AS TOTAL_SALARY,
+MAX(SALARY) AS MAXIMUM_SALARY,
+AVG(SALARY) AS AVERAGE_SALARY
+FROM Employee
+GROUP BY DEPARTMENT_NAME;
+
+---------- 6. Arrange records depending upon salary
+SELECT *
+FROM Employee
+ORDER BY SALARY ASC;
+
+-------- 7. Give unique sequence to all employees
+SELECT EMPLOYEE_ID,
+NAME,
+ROW_NUMBER() OVER (ORDER BY EMPLOYEE_ID) AS SEQUENCE_NUMBER
+FROM Employee;
+
+--------- 8. Give ranking to employees based on salary
+SELECT EMPLOYEE_ID,
+NAME,
+SALARY,
+RANK() OVER (ORDER BY SALARY DESC) AS RANKING
+FROM Employee;
+
+---------- 9. Add one more column age in employee table
+ALTER TABLE Employee
+ADD COLUMN AGE2 INT;
+
+--------- 10. Default value 26 and range 26-60
+ALTER TABLE Employee
+MODIFY AGE2 INT DEFAULT 26 CHECK (AGE2 BETWEEN 26 AND 60);
+UPDATE Employee
+SET AGE2 = 26;
+SELECT * FROM Employee;
+
+---------- 11. Current values in age column
+SELECT EMPLOYEE_ID, NAME, AGE2
+FROM Employee;
+
+--------- 12. Number of departments
+SELECT COUNT(DISTINCT DEPARTMENT_NAME) AS TOTAL_DEPARTMENTS
+FROM Employee;
+
+--------- 13. Display all employee names in uppercase
+SELECT UPPER(NAME)
+FROM Employee;
+
+---------- 14. Display first four alphabets from names
+SELECT SUBSTRING(NAME, 1, 4)
+FROM Employee;
+
+---------- 15. Display position of 'a' in names
+SELECT NAME,
+INSTR(LOWER(NAME), 'a') AS POSITION_OF_A
+FROM Employee;
+
+--------- 16. Total employees working in every department
+SELECT DEPARTMENT_NAME,
+COUNT(*) AS TOTAL_EMPLOYEES
+FROM Employee
+GROUP BY DEPARTMENT_NAME;
+
+---------- 17. Total employees working for every manager
+SELECT MANAGER_NAME,
+COUNT(*) AS TOTAL_EMPLOYEES
+FROM Employee
+GROUP BY MANAGER_NAME;
+
+------------ 18. Display records where employee id is 101, 102 or 110
+SELECT *
+FROM Employee
+WHERE EMPLOYEE_ID IN (101, 102, 110);
+
+----------- 19. Display records where employee id is between 101 and 110
+SELECT *
+FROM Employee
+WHERE EMPLOYEE_ID BETWEEN 101 AND 110;
+
+----------- 20. Display records where department is HR
+SELECT *
+FROM Employee
+WHERE DEPARTMENT_NAME = 'HR';
+
+----------- 21. Display records where department is HR or Accts
+SELECT *
+FROM Employee
+WHERE DEPARTMENT_NAME IN ('HR', 'Accts');
+
+----------- 22. Display records where name starts with A
+SELECT *
+FROM Employee
+WHERE NAME LIKE 'A%';
+
+------------ 23. Display records where name contains a
+SELECT *
+FROM Employee
+WHERE NAME LIKE '%a%';
+
+------------ 24. Display departments where average salary is less than 12000
+SELECT DEPARTMENT_NAME,
+AVG(SALARY) AS AVERAGE_SALARY
+FROM Employee
+GROUP BY DEPARTMENT_NAME
+HAVING AVG(SALARY) < 12000;
+
+------------ 25. Display records where department is not Accts and salary is not between 10000 and 20000
+SELECT *
+FROM Employee
+WHERE DEPARTMENT_NAME != 'Accts'
+AND SALARY NOT BETWEEN 10000 AND 20000;
