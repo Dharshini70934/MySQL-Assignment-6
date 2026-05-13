@@ -18,83 +18,83 @@ INSERT INTO Worker VALUES
 
 SELECT * FROM Worker;
 
------- Q1. Fetch FIRST_NAME using alias WORKER_NAME
+-- Q1. Fetch FIRST_NAME using alias WORKER_NAME
 SELECT FIRST_NAME AS WORKER_NAME
 FROM Worker;
 
--------- Q2. Fetch FIRST_NAME in upper case
+-- Q2. Fetch FIRST_NAME in upper case
 SELECT UPPER(FIRST_NAME)
 FROM Worker;
 
--------- Q3. Fetch unique DEPARTMENT values
+-- Q3. Fetch unique DEPARTMENT values
 SELECT DISTINCT DEPARTMENT
 FROM Worker;
 
------- Q4. Print first three characters of FIRST_NAME
+-- Q4. Print first three characters of FIRST_NAME
 SELECT SUBSTRING(FIRST_NAME, 1, 3)
 FROM Worker;
 
---------- Q5. Find position of alphabet 'a' in Amitabh
+-- Q5. Find position of alphabet 'a' in Amitabh
 SELECT INSTR('Amitabh', 'a');
 
--------- Q6. Print FIRST_NAME after removing right side spaces
+-- Q6. Print FIRST_NAME after removing right side spaces
 SELECT RTRIM(FIRST_NAME)
 FROM Worker;
 
-------- Q7. Print DEPARTMENT after removing left side spaces
+-- Q7. Print DEPARTMENT after removing left side spaces
 SELECT LTRIM(DEPARTMENT)
 FROM Worker;
 
-------- Q8. Fetch unique DEPARTMENT values with their length
+-- Q8. Fetch unique DEPARTMENT values with their length
 SELECT DISTINCT DEPARTMENT, LENGTH(DEPARTMENT)
 FROM Worker;
 
-------- Q9. Replace 'a' with 'A' in FIRST_NAME
+-- Q9. Replace 'a' with 'A' in FIRST_NAME
 SELECT REPLACE(FIRST_NAME, 'a', 'A')
 FROM Worker;
 
--------- Q10. Print FIRST_NAME and LAST_NAME as COMPLETE_NAME
+-- Q10. Print FIRST_NAME and LAST_NAME as COMPLETE_NAME
 SELECT CONCAT(FIRST_NAME, ' ', LAST_NAME) AS COMPLETE_NAME
 FROM Worker;
 
---------- Q11. Print all Worker details ordered by FIRST_NAME ascending
+-- Q11. Print all Worker details ordered by FIRST_NAME ascending
 SELECT * FROM Worker
 ORDER BY FIRST_NAME ASC;
 
--------- Q12. Print all Worker details ordered by FIRST_NAME ascending and DEPARTMENT descending
+-- Q12. Print all Worker details ordered by FIRST_NAME ascending and DEPARTMENT descending
 SELECT * FROM Worker
 ORDER BY FIRST_NAME ASC, DEPARTMENT DESC;
 
--------- Q13. Print details of workers with FIRST_NAME as Vipul and Satish
+-- Q13. Print details of workers with FIRST_NAME as Vipul and Satish
 SELECT * FROM Worker
 WHERE FIRST_NAME IN ('Vipul', 'Satish');
 
--------- Q14. Print details excluding Vipul and Satish
+-- Q14. Print details excluding Vipul and Satish
 SELECT * FROM Worker
 WHERE FIRST_NAME NOT IN ('Vipul', 'Satish');
 
--------- Q15. Print details of workers in Admin department
+-- Q15. Print details of workers in Admin department
 SELECT * FROM Worker
 WHERE DEPARTMENT = 'Admin';
 
---------- Q16. Print details of workers whose FIRST_NAME contains 'a'
+-- Q16. Print details of workers whose FIRST_NAME contains 'a'
 SELECT * FROM Worker
 WHERE FIRST_NAME LIKE '%a%';
 
----------- Q17. Print details of workers whose FIRST_NAME ends with 'a'
+-- Q17. Print details of workers whose FIRST_NAME ends with 'a'
 SELECT * FROM Worker
 WHERE FIRST_NAME LIKE '%a';
 
----------- Q18. Print details of workers whose FIRST_NAME ends with 'h' and contains six alphabets
+-- Q18. Print details of workers whose FIRST_NAME ends with 'h' and contains six alphabets
 SELECT * FROM Worker
 WHERE FIRST_NAME LIKE '%h'
 AND LENGTH(FIRST_NAME) = 6;
 
---------- Q19. Print details of workers whose SALARY lies between 100000 and 500000
+-- Q19. Print details of workers whose SALARY lies between 100000 and 500000
 SELECT * FROM Worker
 WHERE SALARY BETWEEN 100000 AND 500000;
 
----------- Q20. Print details of workers who joined in Feb 2014
+-- Q20. Print details of workers who joined in Feb 2014
 SELECT * FROM Worker
 WHERE MONTH(JOINING_DATE) = 2
 AND YEAR(JOINING_DATE) = 2014;
