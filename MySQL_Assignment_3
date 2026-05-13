@@ -1,0 +1,89 @@
+CREATE TABLE Batch (
+    BATCH_CODE INT PRIMARY KEY,
+    NAME VARCHAR(50),
+    DURATION VARCHAR(30),
+    DESCRIPTION VARCHAR(100)
+);
+
+CREATE TABLE Trainer (
+    TRAINER_ID INT PRIMARY KEY,
+    TRAINER_NAME VARCHAR(50),
+    ADDRESS VARCHAR(100),
+    QUALIFICATION VARCHAR(50),
+    EXPERIENCE INT,
+    DOMAIN VARCHAR(50),
+    BATCH_CODE INT,
+    FOREIGN KEY (BATCH_CODE) REFERENCES Batch(BATCH_CODE)
+);
+
+CREATE TABLE Student (
+    RN INT PRIMARY KEY,
+    NAME VARCHAR(50),
+    ADDRESS VARCHAR(100),
+    MARKS INT,
+    DOB DATE,
+    BATCH_CODE INT,
+    TRAINER_ID INT,
+    FOREIGN KEY (BATCH_CODE) REFERENCES Batch(BATCH_CODE),
+    FOREIGN KEY (TRAINER_ID) REFERENCES Trainer(TRAINER_ID)
+);
+
+CREATE TABLE Fees (
+    RN INT,
+    FEES_PAID INT,
+    DATE_PAID DATE,
+    FOREIGN KEY (RN) REFERENCES Student(RN)
+);
+
+INSERT INTO Batch VALUES
+(101, 'Java Full Stack', '6 Months', 'Java Development Course'),
+(102, 'Data Science', '8 Months', 'Python and ML Course');
+
+INSERT INTO Trainer VALUES
+(1, 'Ravi Kumar', 'Chennai', 'M.Tech', 8, 'Java', 101),
+(2, 'Anitha Rao', 'Bangalore', 'MCA', 6, 'Python', 102);
+
+INSERT INTO Student VALUES
+(1001, 'Aman', 'Delhi', 85, '2003-05-10', 101, 1),
+(1002, 'Sneha', 'Mumbai', 90, '2002-11-15', 102, 2);
+
+INSERT INTO Fees VALUES
+(1001, 25000, '2025-01-10'),
+(1002, 30000, '2025-02-15');
+
+-- 1. Display Student name, address, Batch Code, Batch Name, Faculty Name, Duration
+SELECT 
+S.NAME AS STUDENT_NAME,
+S.ADDRESS,
+B.BATCH_CODE,
+B.NAME AS BATCH_NAME,
+T.TRAINER_NAME AS FACULTY_NAME,
+B.DURATION
+FROM Student S
+JOIN Batch B
+ON S.BATCH_CODE = B.BATCH_CODE
+JOIN Trainer T
+ON S.TRAINER_ID = T.TRAINER_ID;
+
+-- 2. Display Student name, fees paid and date paid
+SELECT
+S.NAME AS STUDENT_NAME,
+F.FEES_PAID,
+F.DATE_PAID
+FROM Student S
+JOIN Fees F
+ON S.RN = F.RN;
+
+-- 3. Display Batch Code, Batch Name and Trainer details
+SELECT
+B.BATCH_CODE,
+B.NAME AS BATCH_NAME,
+T.TRAINER_ID,
+T.TRAINER_NAME,
+T.ADDRESS,
+T.QUALIFICATION,
+T.EXPERIENCE,
+T.DOMAIN
+FROM Batch B
+JOIN Trainer T
+ON B.BATCH_CODE = T.BATCH_CODE;
