@@ -16,7 +16,6 @@ INSERT INTO Worker VALUES
 (4, 'Anita', 'Rao', 18000, '2014-02-10 00:00:00', 'Accts'),
 (5, 'Ramesh', 'Das', 24000, '2014-02-18 00:00:00', 'HR');
 
-SELECT * FROM Worker;
 
 -- Q1. Fetch FIRST_NAME using alias WORKER_NAME
 SELECT FIRST_NAME AS WORKER_NAME
